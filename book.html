@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>تفاصيل الكتاب</title>
+<style> 
+p strong {
+  margin-right: 10px;
+  color: #3b2f2f;
+}
+#book-category {
+  color: #421f04;
+  font-weight: 600;
+}
+.rating {
+  direction: ltr;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.rating span {
+  color: #ddd;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.rating span:hover {
+  transform: scale(1.2);
+}
+
+.rating span.active {
+  color: #c2a48d;
+}
+
+body{
+  font-family:Cairo, sans-serif;
+  background:#f7f4f1;
+  padding:40px;
+}
+.card{
+  background:#fff;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 20px 40px rgba(0,0,0,.1);
+  max-width:600px;
+  margin:auto;
+}
+h1{margin-bottom:15px;}
+</style>
+</head>
+
+<body>
+<div class="rating">
+  <span data-value="1">★</span>
+  <span data-value="2">★</span>
+  <span data-value="3">★</span>
+  <span data-value="4">★</span>
+  <span data-value="5">★</span>
+</div>
+
+<div class="card">
+  <h1 id="book-title"></h1>
+  <p><strong>التصنيف:</strong> <span id="book-category"></span></p>
+  <p id="book-desc"></p>
+  <a href="https://whatsapp.com/channel/0029Vb02vVmDDmFcMcNADm1x" target="_blank">انضم لقناة الواتس لمتابعة المزيد</a>
+</div>
+
+<script> 
+const params = new URLSearchParams(window.location.search);
+document.getElementById('book-title').innerText = params.get('title');
+document.getElementById('book-category').innerText = params.get('category');
+document.getElementById('book-desc').innerText = params.get('desc');
+document.querySelectorAll('.rating').forEach(rating => {
+  const stars = rating.querySelectorAll('span');
+
+  stars.forEach((star, index) => {
+    star.addEventListener('click', () => {
+      stars.forEach(s => s.classList.remove('active'));
+      for (let i = 0; i <= index; i++) {
+        stars[i].classList.add('active');
+      }
+    });
+  });
+});
+
+</script>
+
+</body>
+</html>
