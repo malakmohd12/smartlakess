@@ -1,92 +1,140 @@
-// ========= ANIMATIONS ON LOAD =========
-window.addEventListener("load", () => {
-  const fadeItems = document.querySelectorAll(".fade-in");
-  fadeItems.forEach((item, index) => {
-    setTimeout(() => {
-      item.classList.add("appear");
-    }, index * 200);
+(function($) {
+
+  "use strict";
+
+  const tabs = document.querySelectorAll('[data-tab-target]');
+  const tabContents = document.querySelectorAll('[data-tab-content]');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = document.querySelector(tab.dataset.tabTarget);
+      tabContents.forEach(tabContent => {
+        tabContent.classList.remove('active');
+      });
+      tabs.forEach(tab => {
+        tab.classList.remove('active');
+      });
+      tab.classList.add('active');
+      target.classList.add('active');
+    });
   });
 
-  // Pulse animation for sensor cards
-  const sensorCards = document.querySelectorAll(".sensor-card");
-  sensorCards.forEach((card, index) => {
-    card.style.animationDelay = ${index * 0.2}s;
-    card.classList.add("pulse-animation");
-  });
-});
+  // Responsive Navigation with Button
 
-// ========= RANDOM SENSOR DATA =========
-function updateSensors() {
-  const tempValue = document.getElementById("tempValue");
-  const phValue = document.getElementById("phValue");
-  const oxygenValue = document.getElementById("oxygenValue");
-  const pollutionValue = document.getElementById("pollutionValue");
+  const hamburger = document.querySelector(".hamburger");
+  const navMenu = document.querySelector(".menu-list");
 
-  // تحديث القيم بشكل عشوائي
-  tempValue.textContent = (22 + Math.random() * 5).toFixed(1) + "°C";
-  phValue.textContent = (6.8 + Math.random() * 0.6).toFixed(2);
-  oxygenValue.textContent = (80 + Math.random() * 10).toFixed(1) + "%";
-  pollutionValue.textContent = (10 + Math.random() * 5).toFixed(1) + "%";
+  hamburger.addEventListener("click", mobileMenu);
 
-  // تأثير بسيط كل مرة تتحدث فيها البيانات
-  const allValues = [tempValue, phValue, oxygenValue, pollutionValue];
-  allValues.forEach(val => {
-    val.classList.add("value-change");
-    setTimeout(() => val.classList.remove("value-change"), 600);
-  });
-}
-
-setInterval(updateSensors, 2000);
-
-// ========= HOVER EFFECTS =========
-const cards = document.querySelectorAll(".sensor-card");
-cards.forEach(card => {
-  card.addEventListener("mouseenter", () => {
-    card.classList.add("hover-glow");
-  });
-  card.addEventListener("mouseleave", () => {
-    card.classList.remove("hover-glow");
-  });
-});
-
-// ========= LANGUAGE TOGGLE =========
-const langBtn = document.getElementById("langBtn");
-let isEnglish = true;
-
-langBtn.addEventListener("click", () => {
-  isEnglish = !isEnglish;
-
-  if (isEnglish) {
-    langBtn.textContent = "AR";
-    document.getElementById("simTitle").textContent = "Real-Time Lake Monitoring";
-    document.getElementById("simDesc").textContent = "Live data simulation for Egyptian lakes' digital sensors.";
-    document.getElementById("tempLabel").textContent = "Water Temperature";
-    document.getElementById("phLabel").textContent = "pH Level";
-    document.getElementById("oxygenLabel").textContent = "Oxygen Level";
-    document.getElementById("pollutionLabel").textContent = "Pollution Index";
-  } else {
-    langBtn.textContent = "EN";
-    document.getElementById("simTitle").textContent = "مراقبة البحيرات في الوقت الحقيقي";
-    document.getElementById("simDesc").textContent = "محاكاة بيانات مباشرة لأجهزة الاستشعار الرقمية في البحيرات المصرية.";
-    document.getElementById("tempLabel").textContent = "درجة حرارة المياه";
-    document.getElementById("phLabel").textContent = "مستوى الحموضة (pH)";
-    document.getElementById("oxygenLabel").textContent = "نسبة الأكسجين";
-    document.getElementById("pollutionLabel").textContent = "مؤشر التلوث";
+  function mobileMenu() {
+      hamburger.classList.toggle("active");
+      navMenu.classList.toggle("responsive");
   }
-  // ========= SCROLL ANIMATION =========
-const scrollElements = document.querySelectorAll(".scroll-animate");
 
-function checkScroll() {
-  const triggerBottom = window.innerHeight * 0.85;
+  const navLink = document.querySelectorAll(".nav-link");
 
-  scrollElements.forEach((el) => {
-    const boxTop = el.getBoundingClientRect().top;
-    if (boxTop < triggerBottom) {
-      el.classList.add("visible");
+  navLink.forEach(n => n.addEventListener("click", closeMenu));
+
+  function closeMenu() {
+      hamburger.classList.remove("active");
+      navMenu.classList.remove("responsive");
+  }
+
+
+  // close when click off of container
+  /*$(document).on('click touchstart', function (e){
+
+    var x = document.getElementById("navigation");
+    if (x.className === "top-menu") {
+      x.className += " menu-bar";
+    } else {
+      x.className = "top-menu";
     }
-  });
-}
 
-window.addEventListener("scroll", checkScroll);
-window.addEventListener("load", checkScroll);
-});
+  });*/
+
+  $(document).ready(function(){
+
+    Chocolat(document.querySelectorAll('.image-link'), {
+        imageSize: 'contain',
+        loop: true
+    });
+
+
+    $('#header-wrap').on('click', '.search-toggle', function(e) {
+      var selector = $(this).data('selector');
+
+      $(selector).toggleClass('show').find('.search-input').focus();
+      $(this).toggleClass('active');
+
+      e.preventDefault();
+    });
+
+
+    // close when click off of container
+    $(document).on('click touchstart', function (e){
+      if (!$(e.target).is('.search-toggle, .search-toggle *, #header-wrap, #header-wrap *')) {
+        $('.search-toggle').removeClass('active');
+        $('#header-wrap').removeClass('show');
+      }
+    });
+
+    $('.main-slider').slick({
+        autoplay: false,
+        autoplaySpeed: 4000,
+        fade: true,
+        dots: true,
+        prevArrow: $('.prev'),
+        nextArrow: $('.next')
+    }); 
+
+    $('.product-grid').slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: false,
+        autoplaySpeed: 2000,
+        dots: true,
+        arrows: false,
+        responsive: [
+          {
+            breakpoint: 1400,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 999,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 660,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+          // You can unslick at a given breakpoint now by adding:
+          // settings: "unslick"
+          // instead of a settings object
+        ]
+    });
+
+    AOS.init({
+      duration: 1200,
+      once: true
+    });
+
+    jQuery('.stellarnav').stellarNav({
+      theme: 'plain',
+      closingDelay: 250
+      // mobileMode: false,
+    });
+
+  }); // End of a document
+
+
+})(jQuery);
