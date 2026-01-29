@@ -1,588 +1,858 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>مكتبة أسيل | كتب وروايات مختارة</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#f7f4f1;
-      --card:#ffffff;
-      --main:#c2a48d;
-      --dark:#3b2f2f;
-      --soft:#eadfd6;
-    }
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      font-family:'Cairo',sans-serif;
-      background:var(--bg);
-      color:var(--dark);
-    }
-    header{
-      padding:30px 60px;
-      display:flex;
-      justify-content:flex-end;
-      align-items:center;
-    }
-    .nav a{
-      margin-right:20px;
-      text-decoration:none;
-      font-weight:600;
-      color:var(--dark);
-      transition:.3s;
-    }
-    .nav a:hover{color:var(--main);}
-    .hero{
-      padding:100px 60px;
-      display:grid;
-      grid-template-columns:1.3fr 1fr;
-      align-items:center;
-      gap:60px;
-    }
-    .hero h1{
-      font-size:52px;
-      margin-bottom:20px;
-    }
-    .hero p{
-      font-size:20px;
-      line-height:2;
-      color:#555;
-    }
-    .book-img-hero{
-      width:260px;
-      height:320px;
-      border-radius:16px;
-      cursor:pointer;
-      box-shadow:25px 30px 50px rgba(0,0,0,.3);
-      transition:.3s;
-    }
-    .book-img-hero:hover{
-      transform:scale(1.05);
-    }
-    .section-title{
-      padding:40px 60px 20px;
-      font-size:34px;
-      font-weight:800;
-    }
-    .filter-buttons{
-      padding:0 60px;
-      margin-bottom:30px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-    }
-    #toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #3b3b3b;
-      color: #fff;
-      padding: 12px 18px;
-      border-radius: 8px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: 0.4s;
-      z-index: 1000;
-      font-size: 14px;
-    }
-    #toast.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .filter-buttons button{
-      padding:8px 15px;
-      font-size:14px;
-      border-radius:12px;
-      background:var(--main);
-      color:#fff;
-      border:none;
-      cursor:pointer;
-      font-weight:600;
-      transition:.3s;
-    }
-    .filter-buttons button:hover{opacity:0.85;}
-    .books, .favorites{
-      padding:0 60px 50px;
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-      gap:30px;
-    }
-    .book, .favorite-book{
-      background:var(--card);
-      border-radius:24px;
-      padding:20px;
-      box-shadow:0 15px 30px rgba(0,0,0,.08);
-      transition:.3s;
-    }
-    .book:hover, .favorite-book:hover{
-      transform:translateY(-8px) scale(1.02);
-      box-shadow:0 20px 40px rgba(0,0,0,.15);
-    }
-    .cover {
-      height: 280px;
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: .3s;
-      cursor: pointer;
-      overflow: hidden;
-      background: transparent;
-    }
-    .cover img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      border-radius:12px;
-      transition: .3s;
-    }
-    .cover img:hover{
-      transform: scale(1.1);
-    }
-    .info h3{
-      margin:15px 0 5px;
-      font-size:17px;
-    }
-    .info span{
-      font-size:14px;
-      color:#777;
-    }
-    .price{
-      font-size:22px;
-      font-weight:800;
-      margin:10px 0;
-      color:var(--main);
-    }
-    .fav{
-      width:100%;
-      padding:10px;
-      border:none;
-      border-radius:14px;
-      background:var(--main);
-      color:#fff;
-      font-weight:700;
-      cursor:pointer;
-      transition:.3s;
-    }
-    .fav:hover{opacity:0.85;}
-    .contact{
-      background:var(--card);
-      margin:50px 60px 80px;
-      padding:50px;
-      border-radius:30px;
-      text-align:center;
-      box-shadow:0 20px 40px rgba(0,0,0,.1);
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:15px;
-    }
-    .contact a{
-      display:inline-block;
-      padding:14px 25px;
-      background:var(--main);
-      color:#fff;
-      text-decoration:none;
-      border-radius:30px;
-      font-weight:700;
-    }
-    input#search-input{
-      width:100%;
-      padding:10px 15px;
-      font-size:16px;
-      border-radius:12px;
-      border:1px solid #ccc;
-      margin-bottom:20px;
-    }
-  </style>
+	<title>مكتبه آسيل</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="author" content="">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="icomoon/icomoon.css">
+	<link rel="stylesheet" type="text/css" href="css/vendor.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+	<!-- script
+	================================================== -->
+	<script src="js/modernizr.js"></script>
+
 </head>
+
 <body>
 
-<header>
-  <div class="nav">
-    <a href="#books">الكتب</a>
-    <a href="#contact">تواصل معنا</a>
-  </div>
-</header>
+<div id="header-wrap">
+	
+	<div class="top-content">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="social-links">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="right-element">
+					</div><!--top-right-->
+				</div>
+				
+			</div>
+		</div>
+	</div><!--top-content-->
 
-<div class="hero">
-  <div>
-    <h1>مكتبة أسيل</h1>
-    <p>
-      مرحبًا بك في عالم القراءة — تجربة كتب متكاملة في جميع التصنيفات.
-    </p>
-  </div>
-  <div>
-    <img class="book-img-hero" src="aseel/images/book-12.png" alt="book" onclick="window.open('aseel/images/book-12.png', '_blank')">
-  </div>
+	<header id="header">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-2">
+					<div class="main-logo">
+						<a href="index.html"><img src="images/logo3.png" alt="logo"></a>
+					</div>
+
+				</div>
+
+				<div class="col-md-10">
+					
+					<nav id="navbar">
+						<div class="main-menu stellarnav">
+							<ul class="menu-list">
+								<li class="menu-item active"><a href="#home" data-effect="Home">Home</a></li>
+								<li class="menu-item has-sub">
+									<a href="#pages" class="nav-link" data-effect="Pages">Pages</a>
+
+									<ul>
+										<li class="active"><a href="index.html">Home</a></li>
+										<li><a href="blog.html">المزيد من كتبنا</a></li>
+									</ul>
+
+								</li>
+
+								<li class="menu-item"><a href="#latest-blog" class="nav-link" data-effect="Articles">تواصل معنا</a></li>
+
+							</ul>
+
+							<div class="hamburger">
+								<span class="bar"></span>
+								<span class="bar"></span>
+								<span class="bar"></span>
+							</div>
+
+						</div>
+					</nav>
+
+				</div>
+
+			</div>
+		</div>
+	</header>
+		
+</div><!--header-wrap-->
+
+<section id="billboard">
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+
+				<button class="prev slick-arrow">
+					<i class="icon icon-arrow-left"></i>
+				</button>
+
+				<div class="main-slider pattern-overlay">
+					<div class="slider-item">
+						<div class="banner-content">
+							<h2 class="banner-title">مكتبه آسيل</h2>
+							<p>مرحبًا بك في عالم القراءة — تجربة كتب متكاملة في جميع التصنيفات.</p>
+						</div><!--banner-content--> 
+						<img src="images/main-banner1.jpg" alt="banner" class="banner-image">
+					</div><!--slider-item-->
+
+					<div class="slider-item">
+						<div class="banner-content">
+							<h2 class="banner-title">Assel book store </h2>
+							<p>مكتبة أسيل توفر مجموعة متنوعة من الكتب الأدبية والثقافية لجميع القراء.</p>
+						</div><!--banner-content--> 
+						<img src="images/main-banner2.jpg" alt="banner" class="banner-image">
+					</div><!--slider-item-->
+
+				</div><!--slider-->
+					
+				<button class="next slick-arrow">
+					<i class="icon icon-arrow-right"></i>
+				</button>
+				
+			</div>
+		</div>
+	</div>
+	
+</section>
+
+<section id="client-holder" data-aos="fade-up">
+	<div class="container">
+		<div class="row">
+			<div class="inner-content">
+				<div class="logo-wrap">
+					<div class="grid">
+						<a href="#"><img src="images/client-image1.png" alt="client"></a>
+						<a href="#"><img src="images/client-image2.png" alt="client"></a>
+						<a href="#"><img src="images/client-image3.png" alt="client"></a>
+						<a href="#"><img src="images/client-image4.png" alt="client"></a>
+						<a href="#"><img src="images/client-image5.png" alt="client"></a>
+					</div>
+				</div><!--image-holder-->
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="featured-books">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+
+			<div class="section-header align-center">
+
+				<h2 class="section-title">اصدارات معرض الكتاب 2026</h2>
+			</div>
+
+			<div class="product-list" data-aos="fade-up">
+				<div class="row">
+
+					<div class="col-md-3">
+						<figure class="product-style">
+							<img src="images/book-12.webp" alt="Books" class="product-item">
+								<button type="button" class="add-to-cart" data-product-tile="add-to-cart">اصدار جديد</button>
+							<figcaption>
+								<h3>روايه مينتو اصدار جديد</h3>
+								<p>للكاتب عمرو عبد الحميد</p>
+								<div class="item-price">$ 90</div>
+							</figcaption>
+						</figure>
+					</div>
+				
+					<div class="col-md-3">
+						<figure class="product-style">
+							<img src="images/bookthatelwishah-131.webp" alt="Books" class="product-item">
+								<button type="button" class="add-to-cart" data-product-tile="add-to-cart">اصدار جديد</button>
+							<figcaption>
+								<h3>روايه ذات الوشاح الوردي </h3>
+								<p>للكاتبه نهي داوود</p>
+								<div class="item-price">$ 95</div>
+							</figcaption>
+						</figure>
+					</div>
+
+					<div class="col-md-3">
+						<figure class="product-style">
+							<img src="images/book-1326.jpg" alt="Books" class="product-item">
+								<button type="button" class="add-to-cart" data-product-tile="add-to-cart">اصدار جديد</button>
+							<figcaption>
+								<h3>روايه الزمهرير الجزء الخامس من سلسله ابابيل</h3>
+								<p>للكاتب احمد الحمدان</p>
+								<div class="item-price">$ 90</div>
+							</figcaption>
+						</figure>
+					</div>
+									
+					<div class="col-md-3">
+						<figure class="product-style">
+							<img src="images/book-1342.webp" alt="Books" class="product-item">
+								<button type="button" class="add-to-cart" data-product-tile="add-to-cart">اصدار جديد</button>
+							<figcaption>
+								<h3>روايه جريمه في رأس السيد هود</h3>
+								<p>للكاتبه مني سلامه</p>
+								<div class="item-price">$ 95.00</div>
+							</figcaption>
+						</figure>
+					</div>
+
+				</div><!--ft-books-slider-->				
+			</div><!--grid-->
+
+
+			</div><!--inner-content-->
+		</div>
+		
+		<div class="row">
+			<div class="col-md-12">
+
+			</div>		
+		</div>
+	</div>
+</section>
+
+<section id="best-selling" class="leaf-pattern-overlay">
+	<div class="corner-pattern-overlay"></div>
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-8 col-md-offset-2">
+
+				<div class="row">
+
+					<div class="col-md-6">
+						<figure class="products-thumb">
+							<img src="images/book-1319.jpg" alt="book" class="single-image">
+						</figure>	
+					</div>
+
+					<div class="col-md-6">
+						<div class="product-entry">
+							<h2 class="section-title divider">اكثر الكتب مبيعاً</h2>
+
+							<div class="products-content">
+								<div class="author-name">ميرنا المهديه</div>
+								<h3 class="item-title">قضيه مخالب الفط</h3>
+								<p>الجزءالخامس من سلسله نوح الألفي.</p>
+								<div class="item-price">$ 95.00</div>
+								<div class="btn-wrap">
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+				<!-- / row -->
+
+			</div>
+
+		</div>
+	</div>
+</section>
+
+<section id="popular-books" class="bookshelf">
+	<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+
+			<div class="section-header align-center">
+				<div class="title">
+					<span>Some quality items</span>
+				</div>
+				<h2 class="section-title">بعض كتبنا</h2>
+			</div>
+   
+			<ul class="tabs">
+			  <li data-tab-target="#all-genre" class="active tab">كل الكتب</li>
+			  <li data-tab-target="#business" class="tab">جديد</li>
+			  <li data-tab-target="#technology" class="tab">تنميه بشريه </li>
+			  <li data-tab-target="#romantic" class="tab">رومانسي</li>
+			  <li data-tab-target="#adventure" class="tab">ديني</li>
+			  <li data-tab-target="#fictional" class="tab">رعب</li>
+			</ul>
+
+			<div class="tab-content">
+			  <div id="all-genre" data-tab-content class="active">
+			  	<div class="row">
+
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-1328.jpg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">اسامه عبد الرءوف</button>
+							<figcaption>
+								<h3>نبي ارض الشمال</h3>
+								<p>للكاتب اسامه عبد الرءوف الشاذلي</p>
+								<div class="item-price">$ 90.00</div>
+							</figcaption>
+						</figure>
+					</div>
+
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-154.jpeg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">خوله حمدي</button>
+							<figcaption>
+								<h3>نار بلا شرار</h3>
+								<p>للكاتبه خوله حمدي</p>
+								<div class="item-price">$ 90.00</div>
+							</figcaption>
+						</figure>
+					</div>
+
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-1346.jpg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">شهد قربان</button>
+							<figcaption>
+								<h3>روايه البارون الجزءالثالث من سلسله 005</h3>
+								<p>شهد قربان</p>
+								<div class="item-price">$ 55.00</div>
+							</figcaption>
+						</figure>
+					</div>
+
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-1393.jpeg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">احمد الحمدان</button>
+							<figcaption>
+								<h3>روايه آزر </h3>
+								<p>روايه منفرده للكاتب احمد الحمدان</p>
+								<div class="item-price">$ 60.00</div>
+							</figcaption>
+						</figure>
+					</div>
+
+				</div>
+				<div class="row">
+
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-1305.jpeg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">اسامه المسلم</button>
+							<figcaption>
+								<h3>روايه هذا ما حدث معها مرتبطه بروايه خوف و هذا ما حدث معه</h3>
+								<p>اسامه المسلم</p>
+								<div class="item-price">$ 95</div>
+							</figcaption>
+						</figure>
+					</div>
+
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-11.webp" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">يوسف عماد</button>
+							<figcaption>
+								<h3>مشفي ليفان </h3>
+								<p>للكاتب يوسف عماد</p>
+								<div class="item-price">$90.00</div>
+							</figcaption>
+						</figure>
+					</div>
+
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-110.webp" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">رحمه نبيل</button>
+							<figcaption>
+								<h3>قصر الخواجه</h3>
+								<p>للكاتبه رحمه نبيل</p>
+								<div class="item-price">$ 90.00</div>
+							</figcaption>
+						</figure>
+					</div>
+
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-1394.webp" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">هدير كوكه</button>
+							<figcaption>
+								<h3>روايه كوضوح التوت</h3>
+								<p>للكاتبه:هدير كوكه</p>
+								<div class="item-price">$ 85.00</div>
+							</figcaption>
+						</figure>
+					</div>
+
+		    	</div>
+
+			  </div>
+			  <div id="business" data-tab-content>
+			  	<div class="row">
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-15.webp" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">احمد يونس</button>
+							<figcaption>
+								<h3>روايه:نادر فوده 9</h3>
+								<p>للكاتب:احمد يونس</p>
+								<div class="item-price">$ 90.00</div>
+							</figcaption>
+						</figure>
+					</div>
+
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-18.webp" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">دعاء عبد الرحمن</button>
+							<figcaption>
+								<h3>ظل النعيم الجزء الثاني من داو</h3>
+								<p>للكاتبه:دعاء عبد الرحمن</p>
+								<div class="item-price">$ 90.00</div>
+							</figcaption>
+						</figure>
+					</div>
+
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-167.jpg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">مريم الحيسي</button>
+							<figcaption>
+								<h3>اكتب حتي لا اصاب بالجنون</h3>
+								<p>للكاتبه:مريم الحيسي</p>
+								<div class="item-price">$130.00</div>
+							</figcaption>
+						</figure>
+					</div>
+
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-171.jpg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">عبد الرحمن محمد</button>
+							<figcaption>
+								<h3>روايه:لوكانده الجن</h3>
+								<p>للكاتب:عبد الرحمن محمد</p>
+								<div class="item-price">$95.00</div>
+							</figcaption>
+						</figure>
+					</div>
+
+		    	 </div>
+			  </div>
+
+			  <div id="technology" data-tab-content>
+			  	<div class="row">
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-11.png" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">توماس إريكسون</button>
+							<figcaption>
+								<h3>محاط بالمرضي النفسيين</h3>
+								<p>توماس إريكسون</p>
+								<div class="item-price">$ 55.00</div>
+							</figcaption>
+						</figure>
+					</div>
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-15.jpg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">محمد طارق</button>
+							<figcaption>
+								<h3>افكار تجعلك تحب الحياه</h3>
+								<p>محمد طارق</p>
+								<div class="item-price">$ 55.00</div>
+							</figcaption>
+						</figure>
+					</div>
+
+
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-13160.jpg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">توماس إريكسون</button>
+							<figcaption>
+								<h3>محاط بالحمقي</h3>
+								<p>توماس إريكسون </p>
+								<div class="item-price">$ 55.00</div>
+							</figcaption>
+						</figure>
+					</div>
+
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-119.jpg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">جورج كلاسون</button>
+							<figcaption>
+								<h3>اغني رجل في بابل</h3>
+								<p>جورج كلاسون</p>
+								<div class="item-price">$ 55.00</div>
+							</figcaption>
+						</figure>
+					</div>
+		    	 </div>
+			  </div>
+
+			  <div id="romantic" data-tab-content>
+			  	<div class="row">
+		    	  <div class="col-md-3">
+			    	  <figure class="product-style">
+							<img src="images/book-1315.jpeg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">احمد الحمدان</button>
+							<figcaption>
+								<h3>انت كل اشيائي الجميله</h3>
+								<p>احمد الحمدان</p>
+								<div class="item-price">$ 55.00</div>
+							</figcaption>
+						</figure>
+					</div>
+
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-122.jpg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">ساندرا سراج</button>
+							<figcaption>
+								<h3>إلي مالا نهايه</h3>
+								<p>للكاتبه ساندرا سراج</p>
+								<div class="item-price">$ 60.00</div>
+							</figcaption>
+						</figure>
+					</div>
+
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-134.jpg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">ساندرا سراج</button>
+							<figcaption>
+								<h3>ماذا لو للكاتبه ساندرا سراج</h3>
+								<p>ساندرا سراج</p>
+								<div class="item-price">$ 55.00</div>
+							</figcaption>
+						</figure>
+					</div>
+
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-1323.jpg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">احمد الحمدان</button>
+							<figcaption>
+								<h3>ردني إليك</h3>
+								<p>احمد الحمدان</p>
+								<div class="item-price">$ 55.00</div>
+							</figcaption>
+						</figure>
+					</div>
+		    	 </div>
+			  </div>
+
+			  <div id="adventure" data-tab-content>
+			  	<div class="row">
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-144.jpg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">ادهم شرقاوي</button>
+							<figcaption>
+								<h3>رسائل من القرأن </h3>
+								<p>ادهم شرقاوي</p>
+								<div class="item-price">$ 55.00</div>
+							</figcaption>
+						</figure>
+					</div>
+
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-154.jpg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">ادهم شرقاوي</button>
+							<figcaption>
+								<h3>رسائل من النبي</h3>
+								<p>ادهم شرقاوي</p>
+								<div class="item-price">$ 55.00</div>
+							</figcaption>
+						</figure>
+					</div>
+		    	 </div>
+			  </div>
+
+			  <div id="fictional" data-tab-content>
+			  	<div class="row">
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-137.jpeg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">مريم الحيسي</button>
+							<figcaption>
+								<h3>انني اتعفن رعبا</h3>
+								<p>مريم الحيسي</p>
+								<div class="item-price">$ 120.00</div>
+							</figcaption>
+						</figure>
+					</div>
+
+				  	<div class="col-md-3">
+					  	<figure class="product-style">
+							<img src="images/book-135.jpeg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">معن بن هلال</button>
+							<figcaption>
+								<h3>بيت الخناس</h3>
+								<p>معن بن هلال</p>
+								<div class="item-price">$ 120.00</div>
+							</figcaption>
+						</figure>
+					</div>
+		    	 </div>
+			  </div>
+
+			</div>
+
+		</div><!--inner-tabs-->
+			
+		</div>
+	</div>
+</section>
+
+<section id="quotation" class="align-center">
+	<div class="inner-content">
+		<h2 class="section-title divider">مكتبه آسيل</h2>
+		<blockquote data-aos="fade-up">
+			<q>تقدم لكم الكثير من الكتب المشوقه و العروض</q>
+		</blockquote>
+	</div>		
+</section>
+
+<section id="special-offer" class="bookshelf">
+
+	<div class="section-header align-center">
+		<div class="title">
+		</div>
+		<h2 class="section-title"> عروض مكتبه آسيل</h2>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="inner-content">	
+				<div class="product-list" data-aos="fade-up">
+					<div class="grid product-grid">				
+						<figure class="product-style">
+							<img src="images/book-13.jpeg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">ميرنا المهدي</button>
+							<figcaption>
+								<h3>جاز وروك</h3>
+								<p>ميرنا المهدي</p>
+								<div class="item-price">
+								<span class="prev-price">$ 80.00</span>$ 65.00</div>
+							</figcaption>
+						</figure>
+					
+						<figure class="product-style">
+							<img src="images/book-114.jpeg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">اسامه المسلم</button>
+							<figcaption>
+								<h3>سلسله بساتين عربستان</h3>
+								<p>اسامه المسلم</p>
+								<div class="item-price">
+								<span class="prev-price">$ 600.00</span>$ 530.00</div>
+							</figcaption>
+						</figure>
+					
+						<figure class="product-style">
+							<img src="images/book-117.jpg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">عثمان عابد</button>
+							<figcaption>
+								<h3>سفاح الأزقه</h3>
+								<p>عثمان عابد</p>
+								<div class="item-price">
+								<span class="prev-price">$70.00</span>$ 55.00</div>
+							</figcaption>
+						</figure>
+					
+						<figure class="product-style">
+							<img src="images/book-165.jpg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">عبد الرحمن محمد</button>
+							<figcaption>
+								<h3>حارس المشرحه</h3>
+								<p>عبد الرحمن محمد</p>
+								<div class="item-price">
+								<span class="prev-price">$ 120.00</span> $ 85.00 </div>
+							</figcaption>
+						</figure>
+
+						<figure class="product-style">
+							<img src="images/book-1.jpg" alt="Books" class="product-item">
+							<button type="button" class="add-to-cart" data-product-tile="add-to-cart">جلال العوام</button>
+							<figcaption>
+								<h3>علمتني سوره يوسف</h3>
+								<p>جلال العوام</p>
+								<div class="item-price">
+								<span class="prev-price">$ 120.00</span> $ 85.00 </div>
+							</figcaption>
+						</figure>					
+					</div><!--grid-->
+				</div>
+			</div><!--inner-content-->
+		</div>
+	</div>
+</section>
+
+<section id="subscribe">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-8 col-md-offset-2">
+				<div class="row">
+
+					<div class="col-md-6">
+
+						<div class="title-element">
+							<h2 class="section-title divider">اشترك في قناه الواتس</h2>
+							<a href="https://whatsapp.com/channel/0029Vb02vVmDDmFcMcNADm1x">اضغط هنا للانضمام</a>
+						</div>
+
+					</div>
+
+				</div>
+					
+			</div>
+			
+		</div>
+	</div>
+</section>
+
+<section id="latest-blog">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+
+				<div class="section-header align-center">
+					<div class="title">
+	
+					</div>
+
+				</div>
+
+				<div class="row">
+
+					<div class="col-md-4">
+
+						<article class="column" data-aos="fade-up">
+
+							<figure>
+
+							</figure>
+
+						</article>
+						
+					</div>
+					<div class="col-md-4">
+
+						<article class="column" data-aos="fade-up">
+
+							<div class="post-item">	
+			
+								<h3><a href="https://whatsapp.com/channel/0029Vb02vVmDDmFcMcNADm1x">اشترك لمتابعه كل جديد</a></h3>
+
+								<div class="links-element">
+									<div class="categories">facebook</div>
+									<div class="social-links">
+										<ul>
+											<li>
+												<a href="https://www.facebook.com/profile.php?id=61579745159192"><i class="icon icon-facebook"></i></a>
+											</li>
+										</ul>
+									</div>
+								</div><!--links-element-->
+
+							</div>
+						</article>
+						
+
+					</div>
+
+				</div>
+
+				<div class="row">
+
+				</div>
+
+			</div>	
+		</div>
+	</div>
+</section>
+
+<footer id="footer">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-4">
+				
+				<div class="footer-item">
+					<div class="company-brand">
+						<img src="images/logo3.png" alt="logo" class="footer-logo">
+						<p>تواصل معنا</p>
+					</div>
+				</div>
+				
+			</div>
+
+
+
+			<div class="col-md-2">
+
+			</div>
+
+			<div class="col-md-2">
+
+				<div class="footer-menu">
+
+					<ul class="menu-list">
+						<li class="menu-item">
+
+						</li>
+						<li class="menu-item">
+							<p>"+20 11 52518821 رقم الدعم"</p>
+						</li>
+
+						<li class="menu-item">
+							<a href="https://whatsapp.com/channel/0029Vb02vVmDDmFcMcNADm1x">اشترك في قناه الواتس لمتابعه كل جديد</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+		<!-- / row -->
+
+	</div>
+</footer>
+
+<div id="footer-bottom">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+
+				<div class="copyright">
+					<div class="row">
+
+
+
+						<div class="col-md-6">
+							<div class="social-links align-right">
+				
+							</div>
+						</div>
+
+					</div>
+				</div><!--grid-->
+
+			</div><!--footer-bottom-content-->
+		</div>
+	</div>
 </div>
 
-<div style="padding:0 60px;">
-  <input type="text" id="search-input" placeholder="ابحث عن كتاب...">
-</div>
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/script.js"></script>
 
-<div class="section-title" id="books">📖 الكتب</div>
-<div class="filter-buttons">
-  <button onclick="filterBooks('all')">الكل</button>
-  <button onclick="filterBooks('جديد')">جديد</button>
-  <button onclick="filterBooks('رومانسي')">رومانسي</button>
-  <button onclick="filterBooks('رعب')">رعب</button>
-  <button onclick="filterBooks('تنمية بشرية')">تنمية بشرية</button>
-  <button onclick="filterBooks('ديني')">ديني</button>
-  <button onclick="filterBooks('فانتازيا')">فانتازيا</button>
-</div>
-
-<div class="books" id="books-container"></div>
-
-<div class="section-title">⭐ المفضلة</div>
-<div class="favorites" id="favorites-container"></div>
-
-<div class="contact" id="contact">
-  <a href="https://whatsapp.com/channel/0029Vb02vVmDDmFcMcNADm1x" target="_blank">انضم إلي قناة الواتس</a>
-  <a href="https://wa.me/201152518821" target="_blank">💬 خدمة العملاء</a>
-</div>
-
-<div id="toast">تمت الإضافة ✔</div>
-
-<script>
-// خريطة الصور لكل كتاب
-const bookImages = {
-  'آرسس الجزء الأول': '/aseel/images/book-156.jpeg',
-  'آرسس الجزء الثاني': 'aseel/images/book-157.jpeg',
-  'غصون البندق الجزء الأول او الثاني': 'aseel/images/book-1324.jpeg',
-  'متجر دالجوت الأحلام ج1': 'aseel/images/book-167.jpeg',
-  'متجر دالجوت الأحلام ج2': 'aseel/images/book-169.jpeg',
-  'انتريستا الجزء الأول': 'aseel/images/book-19.jpeg',
-  'لاراسيا': 'aseel/images/book-1314.jpeg',
-  'انتريستا الجزء الثاني': 'aseel/images/book-1321.jpeg',
-  'خوف الجزء الأول': 'aseel/images/book-112.jpeg',
-  'خوف الجزء الثاني': 'aseel/images/book-1364.jpeg',
-  'خوف الجزء الثالث': 'aseel/images/book-162.jpeg',
-  'أرض زيكولا': 'aseel/images/book-1386.jpeg',
-  'أماريتا': 'aseel/images/book-1323.jpeg',
-  'وادي الذئاب': 'aseel/images/book-168.jpeg',
-  'فتاة الياقة الزرقاء': 'aseel/images/book-147.jpg',
-  'قواعد جارتين': 'aseel/images/book-1309.jpg',
-  'دقات الشامو': 'aseel/images/book-141.jpg',
-  'أمواج أكما': 'aseel/images/book-160.jpg',
-  'صاحب الظل الطويل': 'aseel/images/book-1310.jpg',
-  'يوتوبيا': 'aseel/images/book-126.jpg',
-  'أزر': 'aseel/images/book-1393.jpeg',
-  'قنبلة للاستخدام الشخصي': 'aseel/images/book-130.jpeg',
-  'جاز وروك': 'aseel/images/book-13.jpeg',
-  'كويكول': 'aseel/images/book-112.webp',
-  'سقطري': 'aseel/images/book-116.jpg',
-  'أبادول': 'aseel/images/book-129.jpg',
-  'سلسلة بساتين عربستان': 'aseel/images/book-114.jpeg',
-  'متلازمه فريجولي': 'aseel/images/book-124.jpeg',
-  'لأنها كيارا': 'aseel/images/book-1308.jpeg',
-  'مملكة الكوابيس والضباب': 'aseel/images/book-1352.jpg',
-  'البارون': 'aseel/images/book-1346.jpg',
-  'العرش الأسود': 'aseel/images/book-17.jpg',
-  'شمس منتصف الليل': 'aseel/images/book-14.jpeg',
-  'الغرباء': 'aseel/images/book-114.jpg',
-  'الغريب': 'aseel/images/book-114.jpg',
-  'أوراق شمعون المصري': 'aseel/images/book-1311.jpg',
-  'الزمهرير': 'aseel/images/book-1326.jpg',
-  'قضية مخالب القط': 'aseel/images/book-1319.jpg',
-  'مينتو': 'aseel/images/book-12.webp',
-  'مر مثل القهوة حلو مثل الشيكولاته': 'aseel/images/book-136.jpg',
-  'انت كل أشيائي الجميلة': 'aseel/images/book-1315.jpeg',
-  'ردني إليك': 'aseel/images/book-1323.jpg',
-  'إلى ما لا نهاية': 'aseel/images/book-122.jpg',
-  'ماذا لو': 'aseel/images/book-134.jpg',
-  'سأرحل': 'aseel/images/book-1380.jpg',
-  'مدينة الموتى': 'aseel/images/book-141.jpeg',
-  'المرتد': 'aseel/images/book-1310.jpeg',
-  'جمرة': 'aseel/images/book-170.jpg',
-  'هسيس': 'aseel/images/book-1316.jpeg',
-  'لقاء مع كاتب رعب': 'aseel/images/book-144.jpeg',
-  'العوسج': 'aseel/images/book-145.jpeg',
-  'انتيخريستوس': 'aseel/images/book-139.jpg',
-  'سر الغرفة 207': 'aseel/images/book-1317.jpeg',
-  'شبكة العنكبوت': 'aseel/images/book-146.jpg',
-  'اجيج': 'aseel/images/book-147.jpeg',
-  'جحيم العابرين': 'aseel/images/book-120.jpeg',
-  'أرض القرابين': 'aseel/images/book-125.jpeg',
-  'سعد الدباس': 'aseel/images/book-127.jpeg',
-  'ابتسم فانت ميت': 'aseel/images/book-1315.jpg',
-  'الجزار': 'aseel/images/book-155.jpeg',
-  'أذكار الموت': 'aseel/images/book-169.jpg',
-  'العبرات': 'aseel/images/book-169.jpg',
-  'الغيهب': 'aseel/images/book-1318.jpeg',
-  'الانتهازي': 'aseel/images/book-149.jpeg',
-  'ليلة ماطرة': 'aseel/images/book-117.jpeg',
-  'الوليمة': 'aseel/images/book-168.jpg',
-  'النداء': 'aseel/images/book-150.jpeg',
-  'ليلة ظهور القرين': 'aseel/images/book-1317.jpg',
-  'سفاح الأزقة': 'aseel/images/book-117.jpg',
-  'نصف ميت': 'aseel/images/book-1319.jpeg',
-  'نوح المذبوح': 'aseel/images/book-1321.jpg',
-  'جثة لذيذة': 'aseel/images/book-1363.jpg',
-  'بيتشيني': 'aseel/images/book-13022.jpg',
-  'هذا ما حدث معها': 'aseel/images/book-1305.jpeg',
-  'الشيطان والمياه المظلمة': 'aseel/images/book-157.jpg',
-  'انني اتعفن رعبا': 'aseel/images/book-1320.jpg',
-  'فندق المقبرة': 'aseel/images/book-13.webp',
-  'اكتب حتى لا يكلني الشيطان': 'aseel/images/book-164.jpg',
-  'دماء تتاروبيت': 'aseel/images/book-1399.jpeg',
-  'يحدث ليلا': 'aseel/images/book-132.jpeg',
-  'علمتني سورة البقرة': 'aseel/images/book-112.jpg',
-  'معجزات الذكر': 'aseel/images/book-127.jpg',
-  'وبالحق أنزلنا': 'aseel/images/book-152.jpeg',
-  'والذين معه': 'aseel/images/book-16.jpeg',
-  'رسائل من القرآن': 'aseel/images/book-144.jpg',
-  'رسائل من التابعين': 'aseel/images/book-1325.jpg',
-  'رسائل من النبي': 'aseel/images/book-144.jpg',
-  'رسائل من الصحابة': 'aseel/images/book-131.jpg',
-  'على خطى الرسول': 'aseel/images/book-149.jpg',
-  'أنت أيضًا صحابية': 'aseel/images/book-162.jpg',
-  'مدرسة الصحابة': 'aseel/images/book-142.jpg',
-  'نحن نقص عليك': 'aseel/images/book-1320.jpeg',
-  'عمر بن الخطاب': 'aseel/images/book-142.jpg',
-  'زاد': 'aseel/images/book-13019.jpg',
-  'علمتني إيه': 'aseel/images/book-144.jpg',
-  'مع النبي': 'aseel/images/book-144.jpg',
-  'من كل إيه فكرة': 'aseel/images/book-144.jpg',
-  'علمني موسى': 'aseel/images/book-144.jpg',
-  'كوني صحابية': 'aseel/images/book-162.jpg',
-  'يوم في الجنة': 'aseel/images/book-144.jpg',
-  'يوم في حياة النبي': 'aseel/images/book-144.jpg',
-  'إلى المنكسرة قلوبهم': 'aseel/images/book-144.jpg',
-  'مفاتيح خزائن الله': 'aseel/images/book-144.jpg',
-  'فاستجبنا له': 'aseel/images/book-151.jpg',
-  'أفكار تجعلك تحب الحياة': 'aseel/images/book-15.jpg',
-  'فن الذكاء الاجتماعي': 'aseel/images/book-124.jpg',
-  'سيكولوجية الرحيل': 'aseel/images/book-17.webp',
-  'أغنى رجل في بابل': 'aseel/images/book-119.jpg',
-  'أول عشرين ساعة': 'aseel/images/book-13127.jpg',
-  'اقرأ الناس كأنهم كتاب': 'aseel/images/book-1307.jpg',
-  'الهشاشة النفسية': 'aseel/images/book-13023.jpg',
-  'فن التأثير في الآخرين': 'aseel/images/book-124.jpg',
-  'اصنع وقت أكثر من المتاح': 'aseel/images/book-121.jpg',
-  'فكر كأنك طبيب نفسي': 'aseel/images/book-159.jpg',
-  'لا تكن لطيفًا أكثر من اللازم': 'aseel/images/book-14.jpg',
-  'متعة أن تكون في العشرين': 'aseel/images/book-152.jpg',
-  'محاط بالحمقى': 'aseel/images/book-13160.jpg',
-  'متعة أن تكون في الثلاثين': 'aseel/images/book-13918.jpg',
-  'محاط بالمرضى النفسيين': 'aseel/images/book-11.png',
-  'نادي الخامسة صباحًا': 'aseel/images/book-13027.jpg',
-  'السماح بالرحيل': 'aseel/images/book-110.jpg',
-  'قوة العادات': 'aseel/images/book-13013.jpg',
-  'المرونة النفسية': 'aseel/images/book-132.jpg',
-  'فكر وزاد ثراء': 'aseel/images/book-13714.jpg',
-  'من الذي حرك قطعة الجبن': 'aseel/images/book-11.jpg',
-  'كيف تبيع أي شيء لأي إنسان': 'aseel/images/book-13024.jpg',
-  'كن نفسك كل شيء': 'aseel/images/book-137.jpg',
-  'كن أقوى من مشاعرك': 'aseel/images/book-13001.png',
-  'من الصفر إلى واحد': 'aseel/images/book-137.jpg',
-  'كن الشخص الذي يجعلك سعيدًا': 'aseel/images/book-137.jpg',
-  'من الصفر': 'aseel/images/book-137.jpg',
-  'كيف تؤثر على الآخرين': 'aseel/images/book-124.jpg',
-  'نظرية الفستق الجزء الأول': 'aseel/images/book-15.jpg',
-  'نظرية الفستق الجزء الثاني': 'aseel/images/book-15.jpg',
-  'الخروج عن النص': 'aseel/images/book-15.jpg',
-  'الخروج عن النص من جديد': 'aseel/images/book-15.jpg',
-  'أبي الذي أكره': 'aseel/images/book-15.jpg',
-  'تصرفي كسيدة وفكري كرجل': 'aseel/images/book-124.jpg',
-  'قوة الفشل': 'aseel/images/book-15.jpg',
-  'فكر وتصرف كأنك قط': 'aseel/images/book-159.jpg',
-  'أحببت وغدًا': 'aseel/images/book-122.jpg',
-  'العادات الذرية': 'aseel/images/book-13013.jpg',
-  'جلسات نفسية': 'aseel/images/book-159.jpg',
-  'فن اللامبالاة': 'aseel/images/book-15.jpg',
-  'قهوة صباحية مع النفس': 'aseel/images/book-15.jpg',
-  'فن قراءة العقول': 'aseel/images/book-159.jpg',
-  'دليل استخدام الإنسان': 'aseel/images/book-159.jpg',
-  'العادات السبع للمراهقين': 'aseel/images/book-13013.jpg',
-  'لماذا يحب الرجال العاهرات': 'aseel/images/book-159.jpg',
-  'علاقات خطرة': 'aseel/images/book-159.jpg',
-  'قوانين الصراع النفسي': 'aseel/images/book-159.jpg',
-  'لغة الجسد': 'aseel/images/book-124.jpg',
-  'عقل بلا جسد': 'aseel/images/book-159.jpg',
-  'الوحش الذي يسكنك': 'aseel/images/book-159.jpg',
-  'الأب الغني': 'aseel/images/book-119.jpg',
-  'أسرار عقل المليونير': 'aseel/images/book-119.jpg',
-  'لغات الحب': 'aseel/images/book-122.jpg',
-  'اعرف وجهك الآخر': 'aseel/images/book-159.jpg',
-  'عقدك النفسية': 'aseel/images/book-159.jpg',
-  'عيادة نفسية من دخل غرفتك': 'aseel/images/book-159.jpg',
-  'معجزة الصباح': 'aseel/images/book-13027.jpg',
-  'مفتقد للحياة': 'aseel/images/book-15.jpg',
-  'فيتامينات نفسية': 'aseel/images/book-159.jpg',
-  'دع القلق وابدأ الحياة': 'aseel/images/book-15.jpg',
-  'طاقة الأنوثة': 'aseel/images/book-122.jpg',
-  'فن التركيز والإنجاز': 'aseel/images/book-13013.jpg',
-  'نعمة الألم': 'aseel/images/book-159.jpg',
-  'عن شيء اسمه الحب': 'aseel/images/book-122.jpg',
-  'الدحيح': 'aseel/images/book-15.jpg',
-  'تعافيت': 'aseel/images/book-159.jpg',
-  'كيف تعيش كل ساعة': 'aseel/images/book-15.jpg',
-  'تحدث أمام الجميع بجاذبية': 'aseel/images/book-124.jpg',
-  'ملفات سرية من العيادة النفسية': 'aseel/images/book-159.jpg',
-  'لا بطعم الفلامنكو': 'aseel/images/book-122.jpg',
-  'صباح استثنائي': 'aseel/images/book-13027.jpg',
-  'فن الاحتواء الذات': 'aseel/images/book-159.jpg',
-  'التغيير للأفضل': 'aseel/images/book-15.jpg',
-  'قهوة باليورنيوم': 'aseel/images/book-15.jpg',
-  'قوة عقلك الباطن': 'aseel/images/book-159.jpg',
-  'ابني مشتت الانتباه': 'aseel/images/book-159.jpg',
-  'ذكي ولكن مشتت': 'aseel/images/book-159.jpg',
-  'الذكاء العاطفي في التربية': 'aseel/images/book-159.jpg',
-  'حقل التفاح': 'aseel/images/book-136.jpg',
-  '.005': 'aseel/images/book-136.jpg',
-  'واحة اليعقوب': 'aseel/images/book-168.jpeg',
-};
-
-// تعريف الكتب
-const allBooks = [
-  // كتب رعب
-  {title:'مدينة الموتى', category:'رعب', price:55},
-  {title:'المرتد', category:'رعب', price:55},
-  {title:'جمرة', category:'رعب', price:55},
-  {title:'هسيس', category:'رعب', price:55},
-  {title:'لقاء مع كاتب رعب', category:'رعب', price:55},
-  {title:'العوسج', category:'رعب', price:55},
-  {title:'انتيخريستوس', category:'رعب', price:55},
-  {title:'سر الغرفة 207', category:'رعب', price:55},
-  {title:'شبكة العنكبوت', category:'رعب', price:55},
-  {title:'اجيج', category:'رعب', price:55},
-  {title:'جحيم العابرين', category:'رعب', price:55},
-  {title:'أرض القرابين', category:'رعب', price:55},
-  {title:'سعد الدباس', category:'رعب', price:55},
-  {title:'ابتسم فانت ميت', category:'رعب', price:55},
-  {title:'الجزار', category:'رعب', price:55},
-  {title:'أذكار الموت', category:'رعب', price:55},
-  {title:'العبرات', category:'رعب', price:55},
-  {title:'الغيهب', category:'رعب', price:55},
-  {title:'الانتهازي', category:'رعب', price:55},
-  {title:'ليلة ماطرة', category:'رعب', price:55},
-  {title:'الوليمة', category:'رعب', price:55},
-  {title:'النداء', category:'رعب', price:55},
-  {title:'ليلة ظهور القرين', category:'رعب', price:55},
-  {title:'سفاح الأزقة', category:'رعب', price:55},
-  {title:'نصف ميت', category:'رعب', price:55},
-  {title:'نوح المذبوح', category:'رعب', price:55},
-  {title:'جثة لذيذة', category:'رعب', price:55},
-  {title:'بيتشيني', category:'رعب', price:100},
-  {title:'هذا ما حدث معها', category:'رعب', price:100},
-  {title:'الشيطان والمياه المظلمة', category:'رعب', price:135},
-  {title:'انني اتعفن رعبا', category:'رعب', price:110},
-  {title:'فندق المقبرة', category:'رعب', price:110},
-// ... (تكملة مصفوفة الكتب التي توقفت عندها)
-  {title:'اكتب حتى لا يكلني الشيطان', category:'رعب', price:110},
-  {title:'دماء تتاروبيت', category:'رعب', price:110},
-  {title:'يحدث ليلا', category:'رعب', price:60},
-
-  // كتب دينية
-  {title:'علمتني سورة البقرة', category:'ديني', price:70},
-  {title:'معجزات الذكر', category:'ديني', price:70},
-  {title:'رسائل من القرآن', category:'ديني', price:70},
-  {title:'أنت أيضًا صحابية', category:'ديني', price:75},
-
-  // كتب تنمية بشرية
-  {title:'فن اللامبالاة', category:'تنمية بشرية', price:85},
-  {title:'العادات الذرية', category:'تنمية بشرية', price:90},
-  {title:'الأب الغني والأب الفقير', category:'تنمية بشرية', price:95},
-  {title:'جلسات نفسية', category:'تنمية بشرية', price:80},
-  
-  // كتب فانتازيا وجديد
-  {title:'آرسس الجزء الأول', category:'فانتازيا', price:120},
-  {title:'أرض زيكولا', category:'فانتازيا', price:75},
-  {title:'متجر دالجوت الأحلام ج1', category:'جديد', price:110}
-];
-
-let favorites = JSON.parse(localStorage.getItem('favBooks')) || [];
-
-// وظيفة عرض الكتب
-function displayBooks(booksToShow) {
-    const container = document.getElementById('books-container');
-    container.innerHTML = '';
-
-    booksToShow.forEach(book => {
-        const imgSrc = bookImages[book.title] || 'aseel/images/default.jpg'; // صورة افتراضية لو لم توجد
-        const bookDiv = document.createElement('div');
-        bookDiv.className = 'book';
-        bookDiv.innerHTML = `
-            <div class="cover" onclick="window.open('${imgSrc}', '_blank')">
-                <img src="${imgSrc}" alt="${book.title}">
-            </div>
-            <div class="info">
-                <h3>${book.title}</h3>
-                <span>التصنيف: ${book.category}</span>
-                <div class="price">${book.price} ج.م</div>
-                <button class="fav" onclick="addToFavorites('${book.title}')">إضافة للمفضلة ❤️</button>
-            </div>
-        `;
-        container.appendChild(bookDiv);
-    });
-}
-
-// وظيفة الفلترة حسب التصنيف
-function filterBooks(category) {
-    if (category === 'all') {
-        displayBooks(allBooks);
-    } else {
-        const filtered = allBooks.filter(book => book.category === category);
-        displayBooks(filtered);
-    }
-}
-
-// وظيفة البحث
-document.getElementById('search-input').addEventListener('input', (e) => {
-    const term = e.target.value.toLowerCase();
-    const filtered = allBooks.filter(book => book.title.toLowerCase().includes(term));
-    displayBooks(filtered);
-});
-
-// وظيفة الإضافة للمفضلة
-function addToFavorites(title) {
-    if (!favorites.includes(title)) {
-        favorites.push(title);
-        localStorage.setItem('favBooks', JSON.stringify(favorites));
-        displayFavorites();
-        showToast();
-    } else {
-        alert('الكتاب موجود بالفعل في المفضلة');
-    }
-}
-
-// عرض المفضلة
-function displayFavorites() {
-    const favContainer = document.getElementById('favorites-container');
-    favContainer.innerHTML = '';
-    
-    const favList = allBooks.filter(book => favorites.includes(book.title));
-    
-    favList.forEach(book => {
-        const imgSrc = bookImages[book.title] || 'aseel/images/default.jpg';
-        const favDiv = document.createElement('div');
-        favDiv.className = 'favorite-book';
-        favDiv.innerHTML = `
-            <div class="info">
-                <h3>${book.title}</h3>
-                <button class="fav" style="background:#ff4d4d" onclick="removeFromFavorites('${book.title}')">إزالة 🗑️</button>
-            </div>
-        `;
-        favContainer.appendChild(favDiv);
-    });
-}
-
-function removeFromFavorites(title) {
-    favorites = favorites.filter(t => t !== title);
-    localStorage.setItem('favBooks', JSON.stringify(favorites));
-    displayFavorites();
-}
-
-function showToast() {
-    const toast = document.getElementById('toast');
-    toast.className = "show";
-    setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
-}
-
-// التشغيل الأولي
-displayBooks(allBooks);
-displayFavorites();
-</script>
 </body>
 </html>
